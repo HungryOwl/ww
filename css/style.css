@@ -1,0 +1,2308 @@
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-style: normal;
+  src: url(../fonts/roboto_regular.woff) format('woff'), url(../fonts/roboto_regular.ttf) format('truetype'), local('☺');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 900;
+  font-style: normal;
+  src: url(../fonts/roboto_bold.woff) format('woff'), url(../fonts/roboto_bold.ttf) format('truetype'), local('☺');
+}
+@font-face {
+  font-family: 'ivi-icons';
+  font-weight: 400;
+  font-style: normal;
+  src: url(../fonts/ivi-icons.woff) format('woff'), url(../fonts/ivi-icons.ttf) format('truetype'), local('☺');
+}
+body {
+  display: block;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", "Arial", "Verdana", "Geneva", "Tahoma", sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: #333438;
+  font-style: normal;
+  font-weight: normal;
+  background-color: #003a56;
+}
+/* stylelint-disable property-blacklist, property-no-vendor-prefix */
+/* миксин использует box-sizing и вендорные свойства */
+/**
+ * Применяет box-sizing
+ * Необходим, т.к. автопрефиксер не учитывает наши браузеры в ограниченной поддержке
+ * В таких браузерах допустимо отсутствие красивостей, но блочная модель не должна ломаться
+ * @param {keyword} value
+ */
+/* stylelint-enable */
+/**
+ * Предотвращает сдвиг блока из-за верхнего маржина первого ребёнка (использует ::before)
+ */
+/**
+ * Равномерное распределение вложенных инлайн-блоков, включая последнюю строку
+ * @use ::after
+ * @use line-height
+ */
+/**
+ * В Android Chrome не работает свойство -webkit‑text‑size‑adjust, поэтому вот так неоднозначный костыль
+ * @use max-height
+ * @see http://stackoverflow.com/a/15137584/3027390
+ */
+/**
+ * Обнулить и задать точное значение горизонтальных отступов между вложенными инлайн-блоками
+ * Делается при помощи обнуления font-size
+ * Восстанавливает font-size вложенных блоков, если он передан вторым параметром
+ * @param {length} gap-x Отступ между элементами
+ * @param {length} [children-font-size] Восстановить для вложенных элементов указанный font-size
+ * @todo если понадобятся многострочные блоки, придётся переписывать аналогично имеющемуся в stivi_movie
+ */
+/**
+ * Расчёт background-position внутри спрайта
+ * @param {number} posX Позиция по горизонтали (начиная с 1)
+ * @param {number} posY Позиция по вертикали (начиная с 1)
+ * @param {length} sizeX Горизонтальный размер "ячейки" спрайта
+ * @param {length} [sizeY=sizeX] Вертикальный размер "ячейки" спрайта (если не передан, считается равным горизонтальному)
+ */
+/**
+ * Выравнивание дочерних элементов по вертикали;
+ * @param {string} el - псевдоэлемент before/after
+ */
+/**
+ * Подсчёт ширины для блока с дочереними элементами фиксированной ширины
+ * @param {number} item-width - ширина дочерних элементов
+ * @param {number} items-count - количество дочерних элементов
+ * @param {string} item-offset-x - отступы между дочерними элементами
+ */
+/**
+ * Исправляем "дёргания" при ховере на дочерние элементы родителя с position: fixed. Проблема проявляется в Chrome
+ * @see http://stackoverflow.com/questions/25224969/fixed-positioned-header-jumps-in-google-chrome
+ */
+/**
+ * Адаптивная высота блока на основе его текущей ширины и переданного соотношения сторон
+ * Внимание! Блок обязательно должен иметь box-sizing: content-box
+ * @param {number} ratio Соотношение сторон "ширина/высота"
+ * @uses height
+ * @uses padding-bottom
+ * @see https://css-tricks.com/scaled-proportional-blocks-with-css-and-javascript/
+ */
+/* user-defined функции */
+/* stylelint-disable property-no-unknown */
+/* return возвращает значение в этих функциях */
+.function {
+  /**
+     * Применяет отступ, кратный значению @_b__gap-unit
+     * @param {number=1} [multiplier] Множитель для отступа
+     * @return {length} Величина отступа
+     */
+  /**
+     * Применяет цвет
+     * @param {color} color Исходный цвет
+     * @param {number} opacity Прозрачность в дробном представлении
+     * @return {function} Функция fade() для less
+     */
+  /**
+     * Применяет полуразность двух чисел, округлённую до БЛИЖАЙШЕГО целого
+     * @param {number} a Уменьшаемое число
+     * @param {number} b Вычитаемое число
+     * @param {number=1} [multiplier] Множитель для результата
+     * @return {number} Результат вычисления
+     */
+  /**
+     * Применяет полуразность двух чисел, округлённую до БОЛЬШЕГО целого
+     * @param {number} a Уменьшаемое число
+     * @param {number} b Вычитаемое число
+     * @param {number=1} [multiplier] Множитель для результата
+     * @return {number} Результат вычисления
+     */
+  /**
+     * Применяет полуразность двух чисел, округлённую до МЕНЬШЕГО целого
+     * @param {number} a Уменьшаемое число
+     * @param {number} b Вычитаемое число
+     * @param {number=1} [multiplier] Множитель для результата
+     * @return {number} Результат вычисления
+     */
+  /**
+     * Расчёт размера для блока с дочерними элементами равного размера
+     * @param {number} item-size Размер дочернего элемента
+     * @param {number} item-count Количество дочерних элементов
+     * @param {number=0} [gap-size] Отступ между дочерними элементами
+     * @return {number} Размер контейнера
+     */
+  /**
+     * Расчёт размера дочернего элемента при известном размере контейнере
+     * @param {number} container-size Размер контейнера
+     * @param {number} item-count Количество дочерних элементов
+     * @param {number=0} [gap-size] Отступ между дочерними элементами
+     * @return {number} Размер дочернего элемента
+     */
+  /**
+     * Расчёт отступа между дочерними элементами внутри контейнера известного размера
+     * @param {number} container-size Размер контейнера
+     * @param {number} item-size Ширина дочернего элемента
+     * @param {number} item-count Количество дочерних элементов
+     * @return {number} Отступ между дочерними элементами
+     */
+}
+/**
+ * Стили для элемента сетки (в каждом из размеров сетки)
+ * Каждый из аргументов принимает пару значений; первое соответствует ширине элемента, второе — левому отступу
+ * Значения исчисляются в целых колонках сетки соответствующего размера (например @w5 — широкая 5-колоночная сетка)
+ * Значения по умолчанию каждого параметра соответствуют полному числу колонок с нулевым отступом (например для @w5 это "5 0")
+ * Если вместо любого из аргументов передать null, стили для данного размера сетки сгенерены не будут
+ *
+ * @param {[number number]=[2 0]|null} [n2] Пара "ширина/отступ" для 2-колоночной узкой сетки
+ * @param {[number number]=[3 0]|null} [n3] Пара "ширина/отступ" для 3-колоночной узкой сетки
+ * @param {[number number]=[4 0]|null} [n4] Пара "ширина/отступ" для 4-колоночной узкой сетки
+ * @param {[number number]=[4 0]|null} [w4] Пара "ширина/отступ" для 4-колоночной широкой сетки
+ * @param {[number number]=[5 0]|null} [w5] Пара "ширина/отступ" для 5-колоночной широкой сетки
+ * @param {[number number]=[6 0]|null} [w6] Пара "ширина/отступ" для 6-колоночной широкой сетки
+ * @param {[number number]=[7 0]|null} [w7] Пара "ширина/отступ" для 7-колоночной широкой сетки
+ * @param {[number number]=[8 0]|null} [w8] Пара "ширина/отступ" для 8-колоночной широкой сетки
+ *
+ * @uses width Используется для задания собственно ширины элемента
+ * @uses margin-left Используется для задания левого сдвига элемента
+ * @uses padding-left Боковые паддинги создают отступы между колонками (по половине с каждой стороны)
+ * @uses padding-right Боковые паддинги создают отступы между колонками (по половине с каждой стороны)
+ *
+ * @example ._g__bind(@n2: 2 0, @n3: 2 1, @n4: 3 1, @w4: 3 1, @w5: 3 2, @w6: 4 1, @w7: 4 2, @w8: 5 2); // значения для всех размеров
+ * @example ._g__bind(@n3: 2 1, @n4: 3 1, @w4: 3 1); // особые значения только для трёх размеров, остальные на всю ширину
+ * @example ._g__bind(@n2: null, @n3: 2 1, @n4: 3 1, @w4: 3 1, @w5: null, @w6: null, @w7: null, @w8: null); // генерить стили только для трёх размеров
+ */
+/**
+ * Применить к элементу произвольные стили (в каждом из размеров сетки)
+ * Каждый из аргументов соответствует одному из размеров сетки и принимает detached ruleset с необходимыми стилями
+ * Если вместо любого из аргументов передать null, стили для элемента в данном размере сетки применены не будут
+ *
+ * @param {ruleset=null} [n2] Стили элемента при 2-колоночной узкой сетке
+ * @param {ruleset=null} [n3] Стили элемента при 3-колоночной узкой сетке
+ * @param {ruleset=null} [n4] Стили элемента при 4-колоночной узкой сетке
+ * @param {ruleset=null} [w4] Стили элемента при 4-колоночной широкой сетке
+ * @param {ruleset=null} [w5] Стили элемента при 5-колоночной широкой сетке
+ * @param {ruleset=null} [w6] Стили элемента при 6-колоночной широкой сетке
+ * @param {ruleset=null} [w7] Стили элемента при 7-колоночной широкой сетке
+ * @param {ruleset=null} [w8] Стили элемента при 8-колоночной широкой сетке
+ *
+ * @todo избавиться от копипасты магии с медиа-запросами в миксинах bind и spread-styles
+ * @example ._g__spread-styles(@n2: { color: red; }, @n3: { color: blue; })
+ */
+/**
+ * Стили для элемента сетки (отдельно для определённого размера сетки)
+ * @param {number} col-gap-x Расстояние между колонками в сетке
+ * @param {number} layout-cols Число колонок в сетке
+ * @param {number} width-cols Число колонок в ширине элемента
+ * @param {number=0} [offset-left-cols] Число колонок в левом отступе элемента
+ *
+ * @uses width Используется для задания собственно ширины элемента
+ * @uses margin-left Используется для задания левого сдвига элемента
+ * @uses padding-left Боковые паддинги создают отступы между колонками (по половине с каждой стороны)
+ * @uses padding-right Боковые паддинги создают отступы между колонками (по половине с каждой стороны)
+ */
+/**
+ * Стили для контейнера сетки (во всех размерах сетки)
+ * @param {ruleset=null} [inner-styles] Стили для внутреннего контейнера (если необходимо)
+ */
+/**
+ * Стили для контейнера сетки (отдельно для определённого размера сетки)
+ * @param {number} col-gap-x Расстояние между колонками сетки
+ * @param {number} layout-offset-x Боковые отступы от сетки до краёв окна
+ * @param {number=null} [layout-fixed-width] Точная ширина сетки (в случае передачи делает сетку фиксированной)
+ */
+/**
+ * Применить переданные стили ко внутреннему контейнеру сетки (&-inner)
+ * @param {ruleset} inner-styles Стили для внутреннего контейнера
+ */
+/* stylelint-disable property-no-unknown */
+/* return возвращает значение в этих функциях */
+.function {
+  /**
+     * Рассчитать ширину или отступ элемента
+     * @param {number} target-cols Число колонок ширины/отступа элемента
+     * @param {number} layout-cols Число колонок в сетке
+     * @returns {number} Ширина или отступ в процентах
+     */
+  /**
+     * Рассчитать минимальную ширину сетки
+     * @param {string} layout-domain Подмножество состояний сетки (narrow или wide)
+     * @param {number} cols Число колонок в сетке
+     * @returns {number} Рассчитанная ширина сетки
+     */
+}
+/* stylelint-enable property-no-unknown */
+/**
+ * Apply position value, and 0 to 4 offset values
+ * Offsets (length or `auto`) are treated similar to `padding` value
+ * Any of offsets may be `null`, in that case it is counted but not used
+ * @example .position(absolute, 5px, 2px)       // position: absolute, 5px for top and bottom, 2px for left and right
+ * @example .position(relative, 5px, 2px, 3px)  // position: relative, top: 5px, bottom: 3px, 2px for left and right
+ * @example .position(fixed, 5px, 2px, null)    // position: fixed, top: 5px, nothing for bottom, 2px for left and right
+ * @example .position(static)                   // applies just `position: static` (without any offsets)
+ */
+/**
+ * Apply `position: absolute`, and 0 to 4 offset values
+ * Offsets (length or `auto`) are treated similar to `padding` value
+ * Any of offsets may be `null`, in that case it is counted but not used
+ * @example .absolute(5px, 2px)       // applies 5px for top and bottom, 2px for left and right
+ * @example .absolute(5px, 2px, 3px)  // applies 5px for top, 3px for bottom, 2px for left and right
+ * @example .absolute(5px, 2px, null) // applies 5px for top, nothing for bottom, 2px for left and right
+ * @example .absolute()               // applies just `position: absolute` (without any offsets)
+ */
+/**
+ * Apply `position: fixed`, and 0 to 4 offset values
+ * Offsets (length or `auto`) are treated similar to `padding` value
+ * Any of offsets may be `null`, in that case it is counted but not used
+ * @example .fixed(5px, 2px)       // applies 5px for top and bottom, 2px for left and right
+ * @example .fixed(5px, 2px, 3px)  // applies 5px for top, 3px for bottom, 2px for left and right
+ * @example .fixed(5px, 2px, null) // applies 5px for top, nothing for bottom, 2px for left and right
+ * @example .fixed()               // applies just `position: fixed` (without any offsets)
+ */
+/**
+ * Apply `position: relative`, and 0 to 4 offset values
+ * Offsets (length or `auto`) are treated similar to `padding` value
+ * Any of offsets may be `null`, in that case in is counted but not used
+ * @example .relative(5px, 2px)       // applies 5px for top and bottom, 2px for left and right
+ * @example .relative(5px, 2px, 3px)  // applies 5px for top, 3px for bottom, 2px for left and right
+ * @example .relative(5px, 2px, null) // applies 5px for top, nothing for bottom, 2px for left and right
+ * @example .relative()               // applies just `position: relative` (without any offsets)
+ */
+/**
+ * Абсолютное позиционирование от верхнего левого угла
+ * @param {length | percentage | keyword} [left=0] Отступ от левого края отсчётного родителя
+ * @param {length | percentage | keyword} [top=0] Отступ от верхнего края отсчётного родителя
+ */
+/**
+ * Выравнивание элемента абсолютно по вертикали
+ */
+/**
+ * Добавляет фейд в конце текста, который не влазиет в заданный блок
+ * @param {length} line-height Высота строки для текста
+ * @param {color} [color=@_c__bg_common] Цвет фона, над которым расположен текст
+ */
+/**
+ * Линия(::after) для растворения текста
+ * @param {length} line-height Высота строки для текста
+ * @param {length} width ширина линии
+ * @param {color} color Цвет фона, над которым находится текст
+ */
+/**
+ * Применяет обрезку однострочного текста многоточием
+ */
+/**
+ * Отменяет обрезку однострочного текста многоточием
+ */
+/**
+ * Обрезка многоточием многострочного текста с числом строк
+ * @param {number} numLines Ограничение числа строк
+ */
+/* stylelint-disable property-no-vendor-prefix, value-no-vendor-prefix */
+/* этому миксину необходимы вендорные префиксы */
+/* stylelint-enable */
+/**
+ * Отмена обрезки многоточием многострочного текста
+ */
+/* stylelint-disable property-no-vendor-prefix */
+/* этому миксину необходимы вендорные префиксы */
+/* stylelint-enable */
+/**
+ * Создание треугольника на основе свойств 'border'
+ */
+/**
+ * Низкоуровневый миксин для сплошного подчёркивания на основе linear-gradient
+ * @param {color} color Цвет подчёркивания
+ * @param {length|null} height Высота линии (null — не задавать высоту и общие свойства, например при повторном использовании)
+ * @use background-image
+ * @use background-size
+ */
+/**
+ * Низкоуровневый миксин для пунктирного подчёркивания на основе linear-gradient
+ * @param {color} color Цвет пунктирного штриха в подчёркивании
+ * @param {length|null} height Высота линии (null — не задавать высоту и общие свойства, например при повторном использовании)
+ * @use background-image
+ * @use background-size
+ */
+/**
+ * Низкоуровневый миксин для отмены подчёркивания на основе linear-gradient
+ * @use background-image
+ */
+/**
+ * Низкоуровневый миксин для задания вертикальной позиции линии подчёркивания на основе linear-gradient
+ * @param {length} pos-y Вертикальная позиция линии, например 100% или 1.2em
+ * @use background-position
+ */
+/*
+  Градиенты для плавного затемнения (например, в промо)
+  @todo попробовать переделать на CSS-градиенты с расчётам значений через миксины и конкатенацией значений
+  @todo либо вынести в отдельные SVG-файлы (чтобы не хранить инлайновый SVG-ад)
+
+  Затемнение убывает по графику "взлёт самолёта" (линейная середина, касающиеся горизонтали окружности по краям).
+  Считается всё по вот таким волшебнейшим формулам авторства Юры Иванова (и немного Жени Дмитриева):
+    function y0(x) { return Math.sqrt(10000 - (x * x)); }
+    function a(x) { return 100 - y0(100 - x)); }
+    function opacity_left(x) {
+        if (x <= 40)      return y0(7 / 4 * x);
+        else if (x >= 60) return a((7 / 4 * x) - 75);
+        else              return y0(70) + ((x - 40) * (a(30) - y0(70)) / 20);
+    }
+    function opacity_bottom(x) { ??? @todo }
+*/
+/**
+ * Подключает использование файла шрифта
+ * @param {string} font-family Имя шрифта для использования в проекте
+ * @param {string=@font-family} [base-filename] Имя файла шрифта без расширения
+ * @param {number|keyword=normal} [font-weight] Жирность данного шрифта (например: normal, bold или 300)
+ * @param {keyword=normal} [font-style] Стиль (наклонность) данного шрифта (например: normal или italic)
+ * @todo Сделать базовым для всего проекта
+ */
+/**
+ * Применить сглаживание текста "как любят дизайнеры"
+ */
+/* Иконочный шрифт */
+/**
+ * Применяет только размер иконки, без задания самой иконки
+ * Не применяет значения, не являющиеся числом (с единицей изменения или без) или ключевым словом normal/inherit
+ * @param {length} font-size Размер шрифта для значка
+ * @param {length} [line-height=font-size] Высота строки для значка
+ */
+/**
+ * Применение иконки из иконочного шрифта
+ * Применяется к псевдоэлементу
+ * @param {string} icon Константа, обозначающая иконку (список констант в файле: resources/less/_common/_icon_constants.less)
+ * @param {length} font-size Размер шрифта для значка
+ * @param {length} [line-height=font-size] Высота строки для значка
+ */
+/**
+ * Применение иконки из иконочного шрифта (только сам символ, без задания остальных параметров)
+ * Применяется к псевдоэлементу
+ * @param {string} icon Константа, обозначающая иконку (список констант в файле: resources/less/_common/_icon_constants.less)
+ */
+/**
+ * Сброс стилей для корневых элементов страницы
+ */
+/**
+ * Общий сброс стилей для большинства HTML-элементов
+ */
+/**
+ * Сброс жирности
+ */
+/**
+ * Сброс курсивного начертания
+ */
+/**
+ * Сброс маркеров списков
+ */
+/**
+ * Сброс кавычек цитат
+ */
+/**
+ * Сброс стилей таблицы
+ */
+/**
+ * Сброс стилей ссылки
+ */
+/**
+ * Сброс стилей кнопок
+ */
+/**
+ * Сброс стилей кнопки, который опасно использовать для слишком специфичных селекторов
+ * Например, селектор input[type=button] может перебить селектор .ivi-button, и стили кнопки будут некорректные
+ * @todo решить эту проблему более элегантно
+ */
+/**
+ * Сброс базовых стилей инпутов
+ */
+/**
+ * Сброс стилей поискового инпута
+ */
+/**
+ * Сброс стилей для крестика очистки в инпутах
+ */
+/**
+ * Сброс стилей для плейсхолдеров
+ */
+/**
+ * Принудительное скрытие элементов
+ */
+/**
+ * Сброс стилей фокуса
+ */
+/**
+ * Сброс подсветки тапнутого элемента на мобильных устройствах
+ */
+/**
+ * Запрет самовольно масштабировать шрифты на мобильных устройствах
+ */
+/**
+ * Сбросить стили для всех селекторов по умолчанию
+ */
+/**
+ * Сбросить стили для переданных селекторов
+ */
+/**
+ * Стили типографики
+ * Применяются в виде detached rulesets
+ * Должны соответствовать гайдам в зеплине
+ * @see http://lesscss.org/features/#detached-rulesets-feature
+ *
+ * @example
+ *     .myblock {
+ *         @_t__h3();
+ *         color: @_c__red;
+ *     }
+ * @example
+ *     .otherblock {
+ *         min-height: 3 * @_t__h1__line-height;
+ *     }
+ */
+/**
+ * Новые стили типографики
+ * Применяются в виде detached rulesets
+ * @see https://redmine.ivi.ru/issues/365449
+ * включает в себя ровно 4 параметра: font-size, line-height, font-weight, font-style
+ * любая новая используемая в коде комбинация 4 параметров в обязательном порядке заводится в виде новой константы
+ */
+/* stylelint-disable max-line-length */
+/* параметры в миксине имеют длинные имена */
+/**
+ * Устанавливает подчёркивание для ссылок (сплошное или пунктирное)
+ * @param {color} static-color Цвет ссылки и подчёркивания
+ * @param {color} [hover-color=@c_red] Цвет ссылки и подчёркивания при наведении
+ * @param {keyword} [type=solid] Тип подчёркивания (solid|dashed|dynamic)
+ * @param {length} [dash-width=@_t__link-underline__dash-width] Ширина пунктира
+ * @param {length} [gap-width=@_t__link-underline__gap-width] Ширина пробела между пунктирами
+ * @param {length} [@height: @_t__link-underline__height] Высота линии подчёркивания
+ * @param {length} [@pos-y=100%] На каком уровне распологать подчёркивание
+ * РЕКОМЕНДУЕТСЯ ПРИМЕНЯТЬ МИКСИН ТОЛЬКО К ЭЛЕМЕНТАМ С DISPLAY: INLINE
+ * в других случаях придётся самому менять положение подчёркивания
+ */
+/**
+ * Устанавливает цвет для ссылки и для подчёркивания (обычная ссылка со сплошным подчёркиванием)
+ * @param {color} static-color Цвет ссылки и подчёркивания
+ * @param {color} [hover-color=@c_red] Цвет ссылки и подчёркивания при наведении
+ */
+/**
+ * Сплошное подчёркивание в обычном и наведенном состоянии
+ * @param {color} static-color Цвет подчёркивания
+ * @param {color} [hover-color=@c_red] Цвет подчёркивания при наведении
+ * @param {length} [@height: @_t__link-underline__height] Высота линии подчёркивания
+ */
+/**
+ * Пунктирное подчёркивание в обычном и наведенном состоянии
+ * @param {color} static-color Цвет подчёркивания
+ * @param {color} [hover-color=@c_red] Цвет подчёркивания при наведении
+ * @param {length} [dash-width=@_t__link-underline__dash-width] Ширина пунктира
+ * @param {length} [gap-width=@_t__link-underline__gap-width] Ширина пробела между пунктирами
+ * @param {length} [@height: @_t__link-underline__height] Высота линии подчёркивания
+ */
+/**
+ * Динамическое подчёркивание в обычном и наведенном состоянии (появляется только при наведении)
+ * @param {color} hover-color Цвет подчёркивания при наведении
+ * @param {length} [@height: @_t__link-underline__height] Высота линии подчёркивания
+ */
+/**
+ * Убирает подчёркивание у ссылки в обычном и наведённом состоянии
+ */
+/**
+ * Сплошное подчёркивание в обычном и наведенном состоянии
+ * @param {color} color Цвет подчёркивания
+ * @param {length} [@static-height] Высота линии подчёркивания в обычном состоянии
+ * @param {length} [@hover-height] Высота линии подчёркивания при наведении
+ * @example ._t__solid-underline_bold(@_c__violet_3, 2px, 4px);
+ */
+/*
+ * Лоадер
+ * Глобальные миксины
+ */
+/**
+ * @mixin Применяет к [псевдо]элементу фон лоадера заданного размера и анимацию вращения
+ * @param {length=@loader-size-default} size Ширина и высота лоадера
+ * @param {boolean=true} [auto-center] Применять ли стили автоцентрирования + position: absolute
+ * @param {string=red} [color] Цвет лоадера, по умолчанию красный (red | white)
+ */
+/**
+* Базовые стили кнопки
+* Применяет те стили кнопок, которые не зависят от размера, цвета, иконки, зачёркивания, лоадера и т.п.
+* @mixin
+* @apply-to .knob
+*/
+/**
+* РАЗМЕР И ФОРМА кнопки
+* @mixin
+* @apply-to .knob
+*/
+/**
+* Применить все СТИЛИ кнопок (цветовые вариации) по соответствующим классам
+* @mixin
+* @apply-to .knob
+*/
+/**
+* Применить все ИКОНКИ кнопок по соответствующим классам
+* @mixin
+* @apply-to .knob
+*/
+.knob {
+  display: inline-block;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-transition: border-color 0.4s, background-color 0.4s;
+  -o-transition: border-color 0.4s, background-color 0.4s;
+  transition: border-color 0.4s, background-color 0.4s;
+}
+.knob:hover,
+.knob:focus,
+.knob:active {
+  -webkit-transition: border-color 0.08s, background-color 0.08s;
+  -o-transition: border-color 0.08s, background-color 0.08s;
+  transition: border-color 0.08s, background-color 0.08s;
+}
+.knob.vkontakte {
+  background-color: #52749a;
+  border-color: #52749a;
+  color: #f7f8fa;
+}
+.knob.vkontakte:hover,
+.knob.vkontakte:focus {
+  background-color: #6386ac;
+  border-color: #6386ac;
+}
+.knob.vkontakte:active {
+  background-color: #44607f;
+  border-color: #44607f;
+}
+.knob.vkontakte.disabled,
+.knob.vkontakte:disabled {
+  opacity: 0.5;
+}
+.knob.vkontakte.disabled:hover,
+.knob.vkontakte:disabled:hover,
+.knob.vkontakte.disabled:focus,
+.knob.vkontakte:disabled:focus,
+.knob.vkontakte.disabled:active,
+.knob.vkontakte:disabled:active {
+  background-color: #52749a;
+  border-color: #52749a;
+}
+.knob.vkontakte .ivi-button__secondary-text {
+  color: rgba(247, 248, 250, 0.72);
+}
+.knob.vkontakte del {
+  color: rgba(247, 248, 250, 0.5);
+}
+.knob.vkontakte del::after {
+  background-color: #f7f8fa;
+}
+.knob.facebook {
+  background-color: #415e9e;
+  border-color: #415e9e;
+  color: #f7f8fa;
+}
+.knob.facebook:hover,
+.knob.facebook:focus {
+  background-color: #4d6eb6;
+  border-color: #4d6eb6;
+}
+.knob.facebook:active {
+  background-color: #354d81;
+  border-color: #354d81;
+}
+.knob.facebook.disabled,
+.knob.facebook:disabled {
+  opacity: 0.5;
+}
+.knob.facebook.disabled:hover,
+.knob.facebook:disabled:hover,
+.knob.facebook.disabled:focus,
+.knob.facebook:disabled:focus,
+.knob.facebook.disabled:active,
+.knob.facebook:disabled:active {
+  background-color: #415e9e;
+  border-color: #415e9e;
+}
+.knob.facebook .ivi-button__secondary-text {
+  color: rgba(247, 248, 250, 0.72);
+}
+.knob.facebook del {
+  color: rgba(247, 248, 250, 0.5);
+}
+.knob.facebook del::after {
+  background-color: #f7f8fa;
+}
+.knob.yandex {
+  background-color: #fc0;
+  border-color: #fc0;
+  color: #f00;
+}
+.knob.yandex:hover,
+.knob.yandex:focus {
+  background-color: #ffd324;
+  border-color: #ffd324;
+}
+.knob.yandex:active {
+  background-color: #d6ab00;
+  border-color: #d6ab00;
+}
+.knob.yandex.disabled,
+.knob.yandex:disabled {
+  opacity: 0.5;
+}
+.knob.yandex.disabled:hover,
+.knob.yandex:disabled:hover,
+.knob.yandex.disabled:focus,
+.knob.yandex:disabled:focus,
+.knob.yandex.disabled:active,
+.knob.yandex:disabled:active {
+  background-color: #fc0;
+  border-color: #fc0;
+}
+.knob.yandex .ivi-button__secondary-text {
+  color: rgba(255, 0, 0, 0.72);
+}
+.knob.yandex del {
+  color: rgba(255, 0, 0, 0.5);
+}
+.knob.yandex del::after {
+  background-color: #f00;
+}
+.knob.odnoklassniki {
+  background-color: #ee8208;
+  border-color: #ee8208;
+  color: #fff;
+}
+.knob.odnoklassniki:hover,
+.knob.odnoklassniki:focus {
+  background-color: #f89322;
+  border-color: #f89322;
+}
+.knob.odnoklassniki:active {
+  background-color: #c76c07;
+  border-color: #c76c07;
+}
+.knob.odnoklassniki.disabled,
+.knob.odnoklassniki:disabled {
+  opacity: 0.5;
+}
+.knob.odnoklassniki.disabled:hover,
+.knob.odnoklassniki:disabled:hover,
+.knob.odnoklassniki.disabled:focus,
+.knob.odnoklassniki:disabled:focus,
+.knob.odnoklassniki.disabled:active,
+.knob.odnoklassniki:disabled:active {
+  background-color: #ee8208;
+  border-color: #ee8208;
+}
+.knob.odnoklassniki .ivi-button__secondary-text {
+  color: rgba(255, 255, 255, 0.72);
+}
+.knob.odnoklassniki del {
+  color: rgba(255, 255, 255, 0.5);
+}
+.knob.odnoklassniki del::after {
+  background-color: #fff;
+}
+.knob.vkontakte::before {
+  content: '\f103';
+  font-family: ivi-icons;
+  font-weight: normal;
+  font-style: normal;
+  speak: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.knob.facebook::before {
+  content: '\f101';
+  font-family: ivi-icons;
+  font-weight: normal;
+  font-style: normal;
+  speak: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.knob.yandex::before {
+  content: '\f104';
+  font-family: ivi-icons;
+  font-weight: normal;
+  font-style: normal;
+  speak: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.knob.odnoklassniki::before {
+  content: '\f102';
+  font-family: ivi-icons;
+  font-weight: normal;
+  font-style: normal;
+  speak: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+/**
+ * Базовые стили кнопки
+ * Применяет те стили кнопок, которые не зависят от размера, цвета, иконки, зачёркивания, лоадера и т.п.
+ * @mixin
+ */
+/**
+ * Базовые стили для перечёркивания
+ * @mixin
+ * @param {string=@ivi-button__strikeout__selector} [selector] Селектор для зачёркнутого элемента
+ * @apply-to .ivi-button
+ */
+/**
+ * Состояние загрузки кнопки
+ * @mixin
+ * @param {length} size Размер лоадера
+ * @param {string|keyword='white'} [color] Цвет, доступный в лоадере (white или red)
+ * @use color
+ * @use ::after
+ * @apply-to .ivi-button
+ */
+/**
+ * Применить РАЗМЕР кнопки
+ * @mixin
+ * @param {keyword} variant Название вариации размера кнопки: large, huge, two-line и т.п.
+ * @param {boolean|string|keyword=@ivi-button__centered__modifier} centered Центрировать ли содержимое двухстрочной кнопки (см. примеры)
+ * @param {string|keyword=@ivi-button__primary__selector} primary__selector Селектор для крупного текста (null — не генерить его стиль)
+ * @param {string|keyword=@ivi-button__secondary__selector} secondary__selector Селектор для мелкого текста (null — не генерить его стиль)
+ *
+ * @example .ivi-button__size(large);             // большой размер
+ * @example .ivi-button__size(two-line);          // двухстрочная кнопка с настройками по умолчанию
+ * @example .ivi-button__size(two-line, true);    // двухстрочная кнопка с принудительным центрированием
+ * @example .ivi-button__size(two-line, false);   // двухстрочная кнопка с принудительным отсутствием центрирования
+ * @example .ivi-button__size(two-line, ~'.foo'); // двухстрочная кнопка с центрированием в случае подкласса .foo
+ * @example .ivi-button__size(two-line, ~'.foo', ~'.bar', ~'.qux'); // ... + вложенный .bar стилизовать как первую строку, .qux как вторую
+ * @example .ivi-button__size(two-line, ~'.foo', null, null); // ... + не генерить стили для вложенных элементов первой/второй строки
+ */
+/**
+ * Применить СТИЛЬ кнопки (цветовую вариацию)
+ * @mixin
+ * @param {keyword} variant Название вариации стиля кнопки: dark, outline, pale и т.п.
+ * @param {string|keyword=@ivi-button__strikeout__selector} strikeout__selector Селектор для зачёркивания (null — не генерить его стиль)
+ * @param {string|keyword=@ivi-button__secondary__selector} secondary__selector Селектор для мелкого текста (null — не генерить его стиль)
+ */
+/**
+ * Применить ИКОНКУ кнопки
+ * @mixin
+ * @param {string} icon Unicode-значение (чаще всего просто константа вида @_i__whatever)
+ * @use ::before
+ * @apply-to .ivi-button
+ */
+/**
+ * Применить фоновый цвет для кнопки
+ * @mixin
+ * @param {color} base-color Значение базового цвета, от которого расчитываются все остальные состояния
+ * @todo использовано для быстрых ссылок в каталоге. Переделать и применить внутри миксина .ivi-button__style
+ */
+/**
+ * Применить все РАЗМЕРЫ кнопок по соответствующим классам
+ * @mixin
+ * @apply-to .ivi-button
+ */
+/**
+ * Применить все СТИЛИ кнопок (цветовые вариации) по соответствующим классам
+ * @mixin
+ * @apply-to .ivi-button
+ */
+/**
+ * Применить все ИКОНКИ кнопок по соответствующим классам
+ * @mixin
+ * @apply-to .ivi-button
+ */
+.ivi-button.ivi-button_ww {
+  display: inline-block;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: Roboto, iviextras, Arial, Helvetica, FreeSans, sans-serif;
+  font-weight: 500;
+  border-width: 1px;
+  border-style: solid;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-transition: border-color 0.4s, background-color 0.4s;
+  -o-transition: border-color 0.4s, background-color 0.4s;
+  transition: border-color 0.4s, background-color 0.4s;
+  font-size: 16px;
+  line-height: 20px;
+  height: 40px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 4px;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  text-align: center;
+  background-color: #ec174f;
+  border-color: #ec174f;
+  color: #f7f8fa;
+  display: table;
+  min-height: 40px;
+  margin: 0 auto;
+  white-space: normal;
+  text-decoration: none;
+}
+.ivi-button.ivi-button_ww:hover,
+.ivi-button.ivi-button_ww:focus,
+.ivi-button.ivi-button_ww:active {
+  -webkit-transition: border-color 0.08s, background-color 0.08s;
+  -o-transition: border-color 0.08s, background-color 0.08s;
+  transition: border-color 0.08s, background-color 0.08s;
+}
+.ivi-button.ivi-button_ww:disabled,
+.ivi-button.ivi-button_ww.disabled {
+  cursor: default;
+}
+.ivi-button.ivi-button_ww del {
+  position: relative;
+  font-style: italic;
+  margin-right: 0.12em;
+}
+.ivi-button.ivi-button_ww del::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: -0.15em;
+  top: 55%;
+  height: 1px;
+}
+.ivi-button.ivi-button_ww::before {
+  display: inline-block;
+  margin-right: 6px;
+  vertical-align: top;
+  font-size: 16px;
+  line-height: 16px;
+}
+.ivi-button.ivi-button_ww.loading {
+  position: relative;
+  color: transparent !important;
+}
+.ivi-button.ivi-button_ww.loading::after {
+  content: '';
+  width: 26px;
+  height: 26px;
+  /* stylelint-disable-next-line no-unknown-animations */
+  /* анимация loader находится в отдельном файле */
+  -webkit-animation: loader 1s linear infinite;
+  -o-animation: loader 1s linear infinite;
+  animation: loader 1s linear infinite;
+  background-image: url(../images/_base/loader/loader-white.svg);
+  background-size: 26px 26px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -13px;
+  margin-top: -13px;
+}
+@-webkit-keyframes loader {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes loader {
+  0% {
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes loader {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+.ivi-button.ivi-button_ww:hover,
+.ivi-button.ivi-button_ww:focus {
+  background-color: #ef3868;
+  border-color: #ef3868;
+}
+.ivi-button.ivi-button_ww:active {
+  background-color: #ca1141;
+  border-color: #ca1141;
+}
+.ivi-button.ivi-button_ww.disabled,
+.ivi-button.ivi-button_ww:disabled {
+  opacity: 0.5;
+}
+.ivi-button.ivi-button_ww.disabled:hover,
+.ivi-button.ivi-button_ww:disabled:hover,
+.ivi-button.ivi-button_ww.disabled:focus,
+.ivi-button.ivi-button_ww:disabled:focus,
+.ivi-button.ivi-button_ww.disabled:active,
+.ivi-button.ivi-button_ww:disabled:active {
+  background-color: #ec174f;
+  border-color: #ec174f;
+}
+.ivi-button.ivi-button_ww .ivi-button__secondary-text {
+  color: rgba(247, 248, 250, 0.72);
+}
+.ivi-button.ivi-button_ww del {
+  color: rgba(247, 248, 250, 0.5);
+}
+.ivi-button.ivi-button_ww del::after {
+  background-color: #f7f8fa;
+}
+@media (min-width: 600px) {
+  .ivi-button.ivi-button_ww {
+    font-size: 20px;
+    line-height: 22px;
+    height: 48px;
+    padding-left: 23px;
+    padding-right: 23px;
+    border-radius: 4px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+  }
+  .ivi-button.ivi-button_ww::before {
+    display: inline-block;
+    margin-right: 8px;
+    vertical-align: top;
+    font-size: 20px;
+    line-height: 20px;
+  }
+  .ivi-button.ivi-button_ww.loading {
+    position: relative;
+    color: transparent !important;
+  }
+  .ivi-button.ivi-button_ww.loading::after {
+    content: '';
+    width: 30px;
+    height: 30px;
+    /* stylelint-disable-next-line no-unknown-animations */
+    /* анимация loader находится в отдельном файле */
+    -webkit-animation: loader 1s linear infinite;
+    -o-animation: loader 1s linear infinite;
+    animation: loader 1s linear infinite;
+    background-image: url(../images/_base/loader/loader-white.svg);
+    background-size: 30px 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -15px;
+    margin-top: -15px;
+  }
+  @-webkit-keyframes loader {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  @-o-keyframes loader {
+    0% {
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes loader {
+    0% {
+      -webkit-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+}
+@media (min-width: 1020px) {
+  .ivi-button.ivi-button_ww {
+    margin-left: 0;
+  }
+}
+.page-main {
+  display: block;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+}
+@media screen and (min-width: 1344px) {
+  .page-main {
+    width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .page-main-inner {
+    margin-left: -12px;
+    margin-right: -12px;
+  }
+}
+@media screen and (min-width: 600px) and (max-width: 1343px) {
+  .page-main {
+    width: auto;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+@media screen and (max-width: 599px) {
+  .page-main {
+    width: auto;
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+}
+.logo {
+  display: block;
+  height: auto;
+  margin: 0 auto;
+}
+.logo_ww {
+  width: 172px;
+  padding-top: 136px;
+}
+.logo_copyright-wb {
+  display: block;
+  float: left;
+  width: 38px;
+  margin-right: 16px;
+}
+@media (min-width: 512px) {
+  .logo_ww {
+    padding-top: 254px;
+  }
+  .logo_copyright-wb {
+    margin-right: 24px;
+  }
+}
+@media (min-width: 600px) {
+  .logo_ww {
+    width: 233px;
+    padding-top: 190px;
+  }
+}
+@media (min-width: 1020px) {
+  .logo_ww {
+    width: 320px;
+    padding-top: 377px;
+    -webkit-transform: translateX(-90%);
+    -o-transform: translateX(-90%);
+    transform: translateX(-90%);
+  }
+}
+@media screen and (min-width: 1160px) {
+  .trip-event {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 50%;
+    margin-left: 50%;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+@media screen and (min-width: 1020px) and (max-width: 1159px) {
+  .trip-event {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 57.14285714%;
+    margin-left: 42.85714286%;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+@media screen and (min-width: 880px) and (max-width: 1019px) {
+  .trip-event {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    margin-left: 0%;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+@media screen and (min-width: 740px) and (max-width: 879px) {
+  .trip-event {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    margin-left: 0%;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+@media screen and (min-width: 600px) and (max-width: 739px) {
+  .trip-event {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    margin-left: 0%;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+@media screen and (min-width: 512px) and (max-width: 599px) {
+  .trip-event {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    margin-left: 0%;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+@media screen and (min-width: 392px) and (max-width: 511px) {
+  .trip-event {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    margin-left: 0%;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+@media screen and (max-width: 391px) {
+  .trip-event {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    margin-left: 0%;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+.trip-event__description {
+  position: relative;
+  z-index: 1;
+  padding-top: 286px;
+  padding-bottom: 30px;
+  text-align: center;
+}
+.trip-event__description *:first-child {
+  margin-top: 0;
+}
+.trip-event__description *:last-child {
+  margin-bottom: 0;
+}
+.trip-event__title {
+  margin-bottom: 25px;
+  font-size: 28px;
+  line-height: 32px;
+  font-weight: bold;
+}
+.trip-event__info {
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+@media (min-width: 480px) {
+  .trip-event__title {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@media (min-width: 512px) {
+  .trip-event__description {
+    padding-top: 400px;
+    padding-bottom: 35px;
+  }
+}
+@media (min-width: 600px) {
+  .trip-event__description {
+    padding-top: 372px;
+    padding-bottom: 48px;
+  }
+  .trip-event__title {
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 18px;
+    font-size: 56px;
+    line-height: 56px;
+  }
+  .trip-event__info {
+    max-width: 500px;
+    margin-top: 18px;
+    margin-bottom: 32px;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 20px;
+    line-height: 24px;
+  }
+}
+@media (min-width: 980px) {
+  .trip-event__description {
+    padding-top: 380px;
+  }
+}
+@media (min-width: 1020px) {
+  .trip-event__description {
+    padding-top: 170px;
+    padding-bottom: 64px;
+    text-align: left;
+  }
+  .trip-event__title {
+    margin: 0;
+  }
+  .trip-event__info {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+.prize {
+  padding-top: 30px;
+  padding-bottom: 22px;
+  text-align: center;
+}
+@media screen and (min-width: 1160px) {
+  .prize {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 75%;
+    margin-left: 12.5%;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+@media screen and (min-width: 1020px) and (max-width: 1159px) {
+  .prize {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    margin-left: 0%;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+@media screen and (min-width: 880px) and (max-width: 1019px) {
+  .prize {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    margin-left: 0%;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+@media screen and (min-width: 740px) and (max-width: 879px) {
+  .prize {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    margin-left: 0%;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+@media screen and (min-width: 600px) and (max-width: 739px) {
+  .prize {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    margin-left: 0%;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+@media screen and (min-width: 512px) and (max-width: 599px) {
+  .prize {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    margin-left: 0%;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+@media screen and (min-width: 392px) and (max-width: 511px) {
+  .prize {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    margin-left: 0%;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+@media screen and (max-width: 391px) {
+  .prize {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    margin-left: 0%;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+.prize > *:first-child {
+  margin-top: 0;
+}
+.prize > *:last-child {
+  margin-bottom: 0;
+}
+.prize__title {
+  margin-bottom: 12px;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: bold;
+}
+.prize__info {
+  margin-top: 9px;
+  margin-bottom: 14px;
+}
+.prize__achievement {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  padding-top: 18px;
+  font-size: 0;
+  line-height: 0;
+  list-style: none;
+}
+.prize__item {
+  display: block;
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
+}
+.prize__inner-wrapper {
+  display: inline-block;
+  width: 124px;
+  margin-bottom: 18px;
+  text-align: center;
+}
+.prize__item:last-child .prize__inner-wrapper {
+  margin-bottom: 0;
+}
+.prize__item:nth-child(1),
+.prize__item:nth-child(3) {
+  text-align: left;
+}
+.prize__item:nth-child(2),
+.prize__item:nth-child(4) {
+  text-align: right;
+}
+.prize__icon {
+  width: 128px;
+  height: 64px;
+  margin: 0 auto;
+}
+.prize__text {
+  margin-top: 11px;
+  margin-bottom: 14px;
+}
+@media (min-width: 320px) {
+  .prize__achievement {
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+  }
+  .prize__item {
+    -webkit-flex-basis: 48%;
+    -ms-flex-preferred-size: 48%;
+    flex-basis: 48%;
+  }
+  .prize__item:last-child {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@media (min-width: 360px) {
+  .prize__achievement {
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+  }
+  .prize__item:nth-child(n) {
+    text-align: center;
+  }
+}
+@media (min-width: 512px) {
+  .prize {
+    padding-top: 34px;
+    padding-bottom: 18px;
+  }
+  .prize__achievement {
+    padding-top: 18px;
+  }
+  .prize__item {
+    -webkit-flex-basis: 33%;
+    -ms-flex-preferred-size: 33%;
+    flex-basis: 33%;
+  }
+  .prize__item:nth-child(1) {
+    text-align: left;
+  }
+  .prize__item:nth-child(2) {
+    text-align: center;
+  }
+  .prize__item:nth-child(3) {
+    text-align: right;
+  }
+  .prize__item:nth-child(4) {
+    margin-left: auto;
+    margin-right: 20px;
+    text-align: right;
+  }
+  .prize__item:nth-child(5) {
+    margin-right: auto;
+    margin-left: 20px;
+    text-align: left;
+  }
+}
+@media (min-width: 600px) {
+  .prize {
+    padding-top: 48px;
+    padding-bottom: 29px;
+  }
+  .prize__title {
+    margin-bottom: 9px;
+    font-size: 40px;
+    line-height: 44px;
+  }
+  .prize__info {
+    margin-bottom: 16px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .prize__achievement {
+    padding-top: 32px;
+  }
+  .prize__item {
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .prize__inner-wrapper {
+    width: 160px;
+    margin-bottom: 4px;
+  }
+  .prize__text {
+    margin-top: 11px;
+    margin-bottom: 16px;
+  }
+}
+@media (min-width: 740px) {
+  .prize__item:nth-child(n) {
+    text-align: center;
+  }
+}
+@media (min-width: 891px) {
+  .prize__item {
+    -webkit-flex-basis: 20%;
+    -ms-flex-preferred-size: 20%;
+    flex-basis: 20%;
+  }
+  .prize__item:nth-child(4n),
+  .prize__item:nth-child(5n) {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+@media (min-width: 1020px) {
+  .prize {
+    padding-top: 64px;
+  }
+  .prize__achievement {
+    padding-top: 32px;
+  }
+}
+@media (min-width: 1300px) {
+  .prize__inner-wrapper {
+    width: 170px;
+  }
+}
+@media (min-width: 1160px) {
+  .prize__item:nth-child(1),
+  .prize_item:nth-child(2) {
+    text-align: left;
+  }
+  .prize__item:nth-child(4),
+  .prize_item:nth-child(5) {
+    text-align: right;
+  }
+}
+@media screen and (min-width: 1160px) {
+  .event-condition {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 87.5%;
+    margin-left: 12.5%;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+@media screen and (min-width: 1020px) and (max-width: 1159px) {
+  .event-condition {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    margin-left: 0%;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+@media screen and (min-width: 880px) and (max-width: 1019px) {
+  .event-condition {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    margin-left: 0%;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+@media screen and (min-width: 740px) and (max-width: 879px) {
+  .event-condition {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    margin-left: 0%;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+@media screen and (min-width: 600px) and (max-width: 739px) {
+  .event-condition {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    margin-left: 0%;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+@media screen and (min-width: 512px) and (max-width: 599px) {
+  .event-condition {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    margin-left: 0%;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+@media screen and (min-width: 392px) and (max-width: 511px) {
+  .event-condition {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    margin-left: 0%;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+@media screen and (max-width: 391px) {
+  .event-condition {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    margin-left: 0%;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+.event-condition__wrapper {
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto;
+  padding-top: 21px;
+  padding-bottom: 38px;
+  text-align: center;
+}
+.event-condition__wrapper > *:first-child {
+  margin-top: 0;
+}
+.event-condition__wrapper > *:last-child {
+  margin-bottom: 0;
+}
+.event-condition__title {
+  width: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: bold;
+}
+.event-condition__list {
+  margin: 0;
+  padding: 0;
+  padding-top: 9px;
+  padding-bottom: 38px;
+  list-style: none;
+  counter-reset: action-order;
+}
+.event-condition__item {
+  display: block;
+}
+.event-condition__item:not(:first-child) {
+  margin-top: 10px;
+}
+.event-condition__item:not(:last-child) {
+  margin-bottom: 10px;
+}
+.event-condition__item:nth-child(2n + 1) {
+  text-align: left;
+}
+.event-condition__item:nth-child(2n + 2) {
+  text-align: right;
+}
+.event-condition__item:not(:first-child) {
+  margin-top: 7px;
+}
+.event-condition__text {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin: 0;
+  text-align: left;
+}
+.event-condition__item:nth-child(2n + 1) .event-condition__text {
+  padding-left: 72px;
+}
+.event-condition__item:nth-child(2n + 2) .event-condition__text {
+  padding-right: 72px;
+}
+.event-condition__counter {
+  display: block;
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  border-radius: 50%;
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: bold;
+  color: #f5a21d;
+  background-color: #002b3f;
+}
+.event-condition__counter::before {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  content: counter(action-order);
+  counter-increment: action-order;
+}
+.event-condition__item:nth-child(2n + 1) .event-condition__counter {
+  left: 0;
+}
+.event-condition__item:nth-child(2n + 2) .event-condition__counter {
+  right: 0;
+}
+.event-condition__decor {
+  width: 78%;
+  height: 58px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-size: 100% 78px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.event-condition__item:nth-child(2n + 1) .event-condition__decor {
+  background-image: url("../img/icons/line_1.svg");
+}
+.event-condition__item:nth-child(2n + 2) .event-condition__decor {
+  background-image: url("../img/icons/line_2.svg");
+}
+.event-condition-link {
+  background-size: 1px 2px;
+  background-repeat: repeat-x;
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(50%, #f5a21d), to(#f5a21d));
+  background-image: -webkit-linear-gradient(left, #f5a21d 50%, #f5a21d 100%);
+  background-image: -o-linear-gradient(left, #f5a21d 50%, #f5a21d 100%);
+  background-image: linear-gradient(to right, #f5a21d 50%, #f5a21d 100%);
+  background-position: 0 100%;
+  -webkit-transition: background-size 0.4s;
+  -o-transition: background-size 0.4s;
+  transition: background-size 0.4s;
+  display: table;
+  min-height: 24px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 24px;
+  margin-bottom: 24px;
+  font-size: 16px;
+  line-height: 20px;
+  color: #fff;
+  text-decoration: none;
+}
+.event-condition-link:hover {
+  background-size: 1px 4px;
+  background-repeat: repeat-x;
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(50%, #f5a21d), to(#f5a21d));
+  background-image: -webkit-linear-gradient(left, #f5a21d 50%, #f5a21d 100%);
+  background-image: -o-linear-gradient(left, #f5a21d 50%, #f5a21d 100%);
+  background-image: linear-gradient(to right, #f5a21d 50%, #f5a21d 100%);
+  -webkit-transition: background-size 0.08s;
+  -o-transition: background-size 0.08s;
+  transition: background-size 0.08s;
+}
+.event-condition__link-wrapper {
+  padding-top: 20px;
+}
+@media (min-width: 512px) {
+  .event-condition__wrapper {
+    padding-top: 19px;
+    padding-bottom: 14px;
+  }
+  .event-condition__title {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .event-condition__list {
+    padding-top: 17px;
+    padding-bottom: 13px;
+  }
+  .event-condition__link-wrapper {
+    padding-top: 31px;
+  }
+}
+@media (min-width: 600px) {
+  .event-condition__wrapper {
+    max-width: 650px;
+    padding-top: 29px;
+  }
+  .event-condition__title {
+    margin-bottom: 33px;
+    font-size: 40px;
+    line-height: 44px;
+  }
+  .event-condition__list {
+    padding-top: 22px;
+    padding-bottom: 8px;
+    text-align: left;
+  }
+  .event-condition__item:nth-child(n) {
+    margin: 0;
+  }
+  .event-condition__text {
+    max-width: 60%;
+    font-size: 20px;
+    line-height: 24px;
+  }
+  .event-condition__item:nth-child(2) .event-condition__text {
+    padding-right: 0;
+    padding-left: 72px;
+    text-align: left;
+  }
+  .event-condition__item:nth-child(3) .event-condition__text {
+    max-width: 300px;
+  }
+  .event-condition__item:nth-child(2n + 2) .event-condition__counter {
+    left: 0;
+  }
+  .event-condition__decor {
+    width: 27%;
+    height: 43px;
+    margin-left: 29px;
+    background-size: 100% 60px;
+  }
+  .event-condition__link-wrapper {
+    padding-top: 32px;
+  }
+  .event-condition-link {
+    margin-top: 32px;
+  }
+}
+@media (min-width: 1020px) {
+  .event-condition__wrapper {
+    position: relative;
+    max-width: none;
+    padding-bottom: 11px;
+  }
+  .event-condition__title {
+    margin-bottom: 33px;
+    text-align: left;
+  }
+  .event-condition__list {
+    padding-top: 9px;
+  }
+  .event-condition__item:nth-child(2) {
+    margin-left: 24%;
+    text-align: left;
+  }
+  .event-condition__item:nth-child(3) {
+    margin-left: 58%;
+    margin-top: -122px;
+  }
+  .event-condition__text {
+    max-width: none;
+  }
+  .event-condition__item:nth-child(2) .event-condition__text {
+    max-width: 300px;
+  }
+  .event-condition__item:nth-child(1) .event-condition__decor {
+    width: 22%;
+    height: 47px;
+    background-size: 100% 70px;
+  }
+  .event-condition__item:nth-child(2) .event-condition__decor {
+    width: 40%;
+    height: 140px;
+    background-image: url("../img/icons/line_3.svg");
+    background-size: 100% 140px;
+  }
+  .event-condition__link-wrapper {
+    margin-left: 72px;
+    padding-top: 22px;
+  }
+  .event-condition-link {
+    margin-top: 23px;
+    margin-left: 0;
+  }
+}
+@media (min-width: 1160px) {
+  .event-condition__wrapper {
+    margin-left: 0;
+  }
+}
+.social-ww-ww {
+  margin-right: 8px;
+  margin-left: 8px;
+  padding-top: 20px;
+  padding-bottom: 23px;
+  text-align: center;
+}
+.social-ww > *:first-child {
+  margin-top: 0;
+}
+.social-ww__title {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 16px;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: normal;
+}
+@media (min-width: 512px) {
+  .social-ww {
+    padding-top: 14px;
+    padding-bottom: 15px;
+  }
+  .social-ww__title {
+    width: 100%;
+  }
+}
+@media (min-width: 600px) {
+  .social-ww {
+    padding-top: 8px;
+  }
+  .social-ww__title {
+    max-width: 220px;
+  }
+}
+@media (min-width: 1020px) {
+  .social-ww {
+    position: absolute;
+    bottom: 13%;
+    left: -20px;
+    text-align: left;
+  }
+  .social-ww__title {
+    margin-left: 11px;
+    text-align: left;
+  }
+}
+.background-images {
+  display: block;
+  position: absolute;
+  z-index: 0;
+  width: 100%;
+  top: 48px;
+  bottom: 0;
+  background-image: url("../img/bg1_320.jpg");
+  background-size: 512px auto;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min-resolution: 1.5dppx), only screen and (min-resolution: 144dpi) {
+  .background-images {
+    background-image: url("../img/bg1_320@2x.jpg");
+  }
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 3), only screen and (min--moz-device-pixel-ratio: 3), only screen and (-o-min-device-pixel-ratio: 3/1), only screen and (min-resolution: 3dppx), only screen and (min-resolution: 288dpi) {
+  .background-images {
+    background-image: url("../img/bg1_320@3x.jpg");
+  }
+}
+@media (min-width: 512px) {
+  .background-images {
+    background-image: url("../img/bg1_512.jpg");
+    background-size: 990px auto;
+  }
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 512px), only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 512px), only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 512px), only screen and (min-resolution: 1.5dppx) and (min-width: 512px), only screen and (min-resolution: 144dpi) and (min-width: 512px) {
+  .background-images {
+    background-image: url("../img/bg1_512@2x.jpg");
+  }
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 3) and (min-width: 512px), only screen and (min--moz-device-pixel-ratio: 3) and (min-width: 512px), only screen and (-o-min-device-pixel-ratio: 3/1) and (min-width: 512px), only screen and (min-resolution: 3dppx) and (min-width: 512px), only screen and (min-resolution: 288dpi) and (min-width: 512px) {
+  .background-images {
+    background-image: url("../img/bg1_512@3x.jpg");
+  }
+}
+@media (min-width: 1020px) {
+  .background-images {
+    top: 60px;
+    background-image: url("../img/bg1_1020.jpg");
+    background-size: 2050px auto;
+    background-position-y: -72px;
+  }
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 1020px), only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 1020px), only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 1020px), only screen and (min-resolution: 1.5dppx) and (min-width: 1020px), only screen and (min-resolution: 144dpi) and (min-width: 1020px) {
+  .background-images {
+    background-image: url("../img/bg1_1020@2x.jpg");
+  }
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 3) and (min-width: 1020px), only screen and (min--moz-device-pixel-ratio: 3) and (min-width: 1020px), only screen and (-o-min-device-pixel-ratio: 3/1) and (min-width: 1020px), only screen and (min-resolution: 3dppx) and (min-width: 1020px), only screen and (min-resolution: 288dpi) and (min-width: 1020px) {
+  .background-images {
+    background-image: url("../img/bg1_1020@3x.jpg");
+  }
+}
+.copyright-wb {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-size: 0;
+  line-height: 0;
+  text-align: left;
+}
+@media screen and (min-width: 1160px) {
+  .copyright-wb {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 75%;
+    margin-left: 12.5%;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+@media screen and (min-width: 1020px) and (max-width: 1159px) {
+  .copyright-wb {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    margin-left: 0%;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+@media screen and (min-width: 880px) and (max-width: 1019px) {
+  .copyright-wb {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    margin-left: 0%;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+@media screen and (min-width: 740px) and (max-width: 879px) {
+  .copyright-wb {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    margin-left: 0%;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+@media screen and (min-width: 600px) and (max-width: 739px) {
+  .copyright-wb {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    margin-left: 0%;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+@media screen and (min-width: 512px) and (max-width: 599px) {
+  .copyright-wb {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    margin-left: 0%;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+@media screen and (min-width: 392px) and (max-width: 511px) {
+  .copyright-wb {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    margin-left: 0%;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+@media screen and (max-width: 391px) {
+  .copyright-wb {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    margin-left: 0%;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+.copyright-wb::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.copyright-wb::after {
+  content: '';
+  display: block;
+  clear: both;
+  visibility: hidden;
+  height: 0;
+}
+.copyright-wb__info {
+  display: block;
+  float: left;
+  max-width: 77%;
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: left;
+  opacity: 0.2;
+}
+@media (min-width: 512px) {
+  .copyright-wb {
+    padding-top: 20px;
+  }
+}
+@media (min-width: 740px) {
+  .copyright-wb__info {
+    width: 90%;
+  }
+}
+@media (min-width: 1020px) {
+  .copyright-wb {
+    padding-top: 11px;
+  }
+}
+.icon {
+  display: inline-block;
+  font-size: 0;
+  line-height: 0;
+  text-align: center;
+  text-decoration: none;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.icon_plane {
+  background-image: url("../img/icons/ic_plane.svg");
+}
+.icon_car {
+  background-image: url("../img/icons/ic_car.svg");
+}
+.icon_hotel {
+  background-image: url("../img/icons/ic_hotel.svg");
+}
+.icon_ship {
+  background-image: url("../img/icons/ic_ship.svg");
+}
+.icon_lotus {
+  background-image: url("../img/icons/ic_lotus.svg");
+}
+.icon_vk,
+.icon_fb,
+.icon_ok,
+.icon_ya {
+  width: 48px;
+  height: 48px;
+  margin: 6px;
+  line-height: 48px;
+  border-radius: 50%;
+  position: relative;
+  vertical-align: middle;
+}
+.icon_vk::before,
+.icon_fb::before,
+.icon_ok::before,
+.icon_ya::before {
+  font-size: 20px;
+  line-height: 48px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.icon_vk {
+  background-color: #527aa7;
+}
+.icon_fb {
+  background-color: #39589b;
+}
+.icon_ok {
+  background-color: #ed711f;
+}
+.icon_ya {
+  background-color: #fc0;
+}
+.icon_dc {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  top: 14px;
+  left: 50%;
+  -webkit-transform: translateX(-110px);
+  -o-transform: translateX(-110px);
+  transform: translateX(-110px);
+  background-image: url("../img/icons/dc_logo.svg");
+}
+@media (min-width: 512px) {
+  .icon_dc {
+    top: 30px;
+    -webkit-transform: translateX(-205px);
+    -o-transform: translateX(-205px);
+    transform: translateX(-205px);
+  }
+}
+@media (min-width: 600px) {
+  .icon_dc {
+    -webkit-transform: translateX(-205px);
+    -o-transform: translateX(-205px);
+    transform: translateX(-205px);
+  }
+}
+@media (min-width: 1020px) {
+  .icon_dc {
+    -webkit-transform: translateX(-440px);
+    -o-transform: translateX(-440px);
+    transform: translateX(-440px);
+  }
+}
+.breaklines {
+  display: block;
+  width: 0;
+  height: 0;
+  font-size: 0;
+  line-height: 0;
+}
+.trip-event__info .breaklines,
+.event-condition__list .breaklines {
+  display: none;
+}
+@media (min-width: 370px) {
+  .trip-event__info .breaklines {
+    display: block;
+  }
+}
+@media (min-width: 1020px) {
+  .event-condition__list .breaklines {
+    display: block;
+  }
+}
+.palm-tree {
+  display: block;
+  position: absolute;
+  top: 347px;
+  bottom: 0;
+  width: 100%;
+  background-image: url("../img/tinified/bg_palm_mobile_320.png");
+  background-position-x: center;
+  background-position-y: top;
+  background-repeat: repeat-y;
+}
+@media (min-width: 512px) {
+  .palm-tree {
+    top: 452px;
+  }
+}
+@media (min-width: 600px) {
+  .palm-tree {
+    top: 368px;
+  }
+}
+@media (min-width: 1020px) {
+  .palm-tree {
+    background-image: url("../img/tinified/bg_palm_desktop_1020.png");
+  }
+}
